@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Relax — Roblox Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0b16;
+      --card: #1a1524;
+      --muted: #b3b3c6;
+      --accent: #9b5cff;
+      --glass: rgba(255,255,255,0.04);
+      font-family: 'Inter', system-ui, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: linear-gradient(180deg,#0d0913 0%,#0f0b16 60%);
+      color: #f3f1f7;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 28px;
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      animation: slideDown 1s ease forwards;
+    }
+
+    .avatar {
+      width: 92px;
+      height: 92px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.6);
+      transform: scale(0.8);
+      animation: popIn 0.8s ease forwards;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    h1 { margin: 0; font-size: 28px; }
+    p.lead { color: var(--muted); margin: 6px 0 0; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 24px;
+      margin-top: 28px;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 18px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(2,6,23,0.6);
+      border: 1px solid rgba(255,255,255,0.03);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+    .card:nth-child(1) { animation-delay: 0.2s; }
+    .card:nth-child(2) { animation-delay: 0.4s; }
+
+    .skills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      background: var(--glass);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: #e7dfff;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .chip:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    .projects { display: flex; flex-direction: column; gap: 14px; }
+    .project {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .project:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+    }
+    .thumb {
+      width: 120px;
+      height: 76px;
+      border-radius: 8px;
+      background: linear-gradient(135deg,#1a1524,#0f0b16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 12px;
+      border: 1px solid rgba(255,255,255,0.02);
+    }
+    .meta { flex: 1; }
+    .meta h3 { margin: 0; font-size: 16px; }
+    .meta p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+
+    a.ghost, .ghost {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 10px 14px;
+      border-radius: 10px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: background 0.3s, transform 0.3s;
+      display: inline-block;
+    }
+    .ghost:hover {
+      background: var(--accent);
+      color: #fff;
+      transform: scale(1.03);
+    }
+
+    footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 1.5s ease forwards;
+      animation-delay: 1s;
+    }
+
+    @media (max-width:900px) {
+      .grid { grid-template-columns: 1fr; }
+      .avatar { width: 76px; height: 76px; }
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    @keyframes slideDown {
+      0% { transform: translateY(-20px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="avatar"><img src="https://imgur.com/KFntCEs.png" alt="Relax profile"></div>
+      <div>
+        <h1>Relax — Roblox Developer & UI Designer</h1>
+        <p class="lead">Scripting, building and design — focused on performance, UX, and monetization. Available for commissions and collaborations.</p>
+        <div style="margin-top:10px;display:flex;gap:10px;align-items:center">
+          <span class="chip">Luau</span>
+          <span class="chip">Roblox Studio</span>
+          <span class="chip">UI/UX</span>
+          <span class="chip">Builds & Optimization</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <main>
+        <div class="card">
+          <h2 style="margin:0 0 8px">About</h2>
+          <p style="color:var(--muted);margin:0 0 12px">I’m Relax — I’ve been developing Roblox games since 2018. I work on game systems (economy, tools, progression), Datastore saves, optimization, and interfaces that communicate clearly with players. I prefer projects that focus on retention and responsible monetization.</p>
+
+          <h2 style="margin-top:14px">Core Skills</h2>
+          <div class="skills" style="margin-top:8px">
+            <span class="chip">Advanced Luau</span>
+            <span class="chip">Datastore & Saves</span>
+            <span class="chip">State management (Modules)</span>
+            <span class="chip">UI Animations</span>
+            <span class="chip">Mobile-friendly UI</span>
+            <span class="chip">Build optimization</span>
+          </div>
+
+          <h2 style="margin-top:16px">Featured Projects</h2>
+          <div class="projects">
+            <div class="project">
+              <div class="thumb">Mini City RP <br><small style="color:var(--muted);font-size:11px">2025</small></div>
+              <div class="meta">
+                <h3>Mini City RP</h3>
+                <p>Developed the core gameplay (economy, and leaderboards) and the entire HUD — optimized for over 50 simultaneous players.</p>
+              </div>
+            </div>
+
+            <div class="project">
+              <div class="thumb">The Galactic Expanse <br><small style="color:var(--muted);font-size:11px">2022</small></div>
+              <div class="meta">
+                <h3>The Galactic Expanse</h3>
+                <p>Mining system, loot balancing, and integrated shop — implemented basic anti-cheat and spawn optimizations.</p>
+              </div>
+            </div>
+
+            <div class="project">
+              <div class="thumb">Sakura Hibachi Restaurant <br><small style="color:var(--muted);font-size:11px">2021</small></div>
+              <div class="meta">
+                <h3>Sakura Hibachi Restaurant</h3>
+                <p>Full interior design, accessible interfaces, and menu animations that improved mobile retention by 18% (internal report).</p>
+              </div>
+            </div>
+          </div>
+
+          <h2 style="margin-top:16px">Testimonials</h2>
+          <div style="margin-top:8px;color:var(--muted)">
+            <p style="margin:6px 0"><strong>— Studio Lead, PixelWave</strong><br>“Relax delivered the shop system in 2 weeks, with clean documentation and no critical bugs.”</p>
+            <p style="margin:6px 0"><strong>— Designer, BlueArc</strong><br>“Lightweight, responsive UI with consistent animations — players praised the new HUD.”</p>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h2 style="margin:0 0 8px">Services</h2>
+          <ul style="color:var(--muted);margin:0 0 0 18px;padding:0">
+            <li>Game systems commissions (tools, shops, progression)</li>
+            <li>UI/UX for mobile and PC (prototyping + animations)</li>
+            <li>Map building and performance optimization</li>
+          </ul>
+        </div>
+      </main>
+
+      <aside>
+        <div class="card">
+          <h3 style="margin:0 0 8px">Contact</h3>
+          <p style="color:var(--muted);margin:0 0 12px">Interested in hiring or collaborating? Reach out:</p>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <span class="ghost">Roblox: HeatRelax</span>
+            <span class="ghost">Discord: heatrelax</span>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:14px">
+          <h3 style="margin:0 0 8px">Availability</h3>
+          <p style="color:var(--muted);margin:0">Freelance / Collaboration — open for small to medium projects. Typical delivery: 1–4 weeks depending on scope.</p>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <p>© Relax — Roblox Developer</p>
+    </footer>
+  </div>
+</body>
+</html>
