@@ -4,261 +4,554 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Relax — Roblox Developer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0f0b16;
-      --card: #1a1524;
-      --muted: #b3b3c6;
-      --accent: #9b5cff;
-      --glass: rgba(255,255,255,0.04);
-      font-family: 'Inter', system-ui, Arial, sans-serif;
+      --bg: #fafafa;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --text: #111827;
+      --text-muted: #6b7280;
+      --accent: #3b82f6;
+      --accent-light: #dbeafe;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Inter', system-ui, sans-serif;
     }
 
-    * { box-sizing: border-box; }
+    * { 
+      box-sizing: border-box; 
+      margin: 0;
+      padding: 0;
+    }
 
     body {
-      margin: 0;
-      background: linear-gradient(180deg,#0d0913 0%,#0f0b16 60%);
-      color: #f3f1f7;
-      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
     }
 
     .container {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 28px;
-      animation: fadeIn 1.2s ease forwards;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
     }
 
-    header {
+    /* Header with status banner */
+    .status-banner {
+      background: var(--gradient);
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+      margin: -2rem -2rem 2rem -2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .status-banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    .status-content {
       display: flex;
       align-items: center;
-      gap: 20px;
-      animation: slideDown 1s ease forwards;
+      justify-content: center;
+      gap: 0.5rem;
+      font-weight: 500;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+
+    /* Main header */
+    header {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: var(--card);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
 
     .avatar {
-      width: 92px;
-      height: 92px;
-      border-radius: 14px;
+      width: 100px;
+      height: 100px;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.6);
-      transform: scale(0.8);
-      animation: popIn 0.8s ease forwards;
+      border: 3px solid var(--accent-light);
+      transition: transform 0.3s ease;
     }
-    .avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-    h1 { margin: 0; font-size: 28px; }
-    p.lead { color: var(--muted); margin: 6px 0 0; }
+    .avatar:hover {
+      transform: scale(1.05) rotate(2deg);
+    }
 
-    .grid {
+    .avatar img { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+    }
+
+    .header-content h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header-content .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .quick-stats {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 1rem;
+      background: var(--accent-light);
+      border-radius: 12px;
+      min-width: 80px;
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Main content grid */
+    .main-grid {
       display: grid;
-      grid-template-columns: 1fr 360px;
-      gap: 24px;
-      margin-top: 28px;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
     }
 
     .card {
       background: var(--card);
-      padding: 18px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+      padding: 1.5rem 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-content {
+      padding: 0 1.5rem 1.5rem;
+    }
+
+    /* Skills section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .skill-category {
+      padding: 1rem;
+      background: var(--bg);
       border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(2,6,23,0.6);
-      border: 1px solid rgba(255,255,255,0.03);
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.8s ease forwards;
-    }
-    .card:nth-child(1) { animation-delay: 0.2s; }
-    .card:nth-child(2) { animation-delay: 0.4s; }
-
-    .skills { display: flex; flex-wrap: wrap; gap: 8px; }
-    .chip {
-      background: var(--glass);
-      padding: 8px 10px;
-      border-radius: 999px;
-      font-size: 13px;
-      color: #e7dfff;
-      transition: background 0.3s, transform 0.3s;
-    }
-    .chip:hover {
-      background: var(--accent);
-      color: #fff;
-      transform: scale(1.05);
+      border: 1px solid var(--border);
     }
 
-    .projects { display: flex; flex-direction: column; gap: 14px; }
-    .project {
+    .skill-category h4 {
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .skill-list {
       display: flex;
-      gap: 12px;
-      align-items: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
-    .project:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+
+    .skill-tag {
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
     }
-    .thumb {
-      width: 120px;
-      height: 76px;
-      border-radius: 8px;
-      background: linear-gradient(135deg,#1a1524,#0f0b16);
+
+    /* Projects section */
+    .project-card {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 1rem;
+      transition: all 0.2s ease;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    .project-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--gradient);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--muted);
-      font-size: 12px;
-      border: 1px solid rgba(255,255,255,0.02);
+      color: white;
+      font-weight: 600;
+      font-size: 1.2rem;
     }
-    .meta { flex: 1; }
-    .meta h3 { margin: 0; font-size: 16px; }
-    .meta p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
 
-    a.ghost, .ghost {
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 10px 14px;
-      border-radius: 10px;
-      color: var(--muted);
-      text-decoration: none;
-      transition: background 0.3s, transform 0.3s;
-      display: inline-block;
+    .project-info h4 {
+      margin-bottom: 0.25rem;
+      color: var(--text);
     }
-    .ghost:hover {
+
+    .project-info p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-year {
+      background: var(--warning);
+      color: white;
+      padding: 0.125rem 0.5rem;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 500;
+    }
+
+    /* Sidebar */
+    .sidebar-card {
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem;
+      background: var(--bg);
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      transition: background 0.2s ease;
+    }
+
+    .contact-item:hover {
+      background: var(--accent-light);
+    }
+
+    .contact-icon {
+      width: 32px;
+      height: 32px;
       background: var(--accent);
-      color: #fff;
-      transform: scale(1.03);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.9rem;
     }
 
+    /* Footer */
     footer {
-      margin-top: 28px;
-      color: var(--muted);
-      font-size: 13px;
       text-align: center;
-      opacity: 0;
-      animation: fadeIn 1.5s ease forwards;
-      animation-delay: 1s;
+      padding: 2rem;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
     }
 
-    @media (max-width:900px) {
-      .grid { grid-template-columns: 1fr; }
-      .avatar { width: 76px; height: 76px; }
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-    @keyframes slideDown {
-      0% { transform: translateY(-20px); opacity: 0; }
-      100% { transform: translateY(0); opacity: 1; }
-    }
-    @keyframes popIn {
-      0% { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container { padding: 1rem; }
+      .status-banner { margin: -1rem -1rem 1rem -1rem; }
+      header { 
+        grid-template-columns: 1fr; 
+        text-align: center; 
+        gap: 1rem; 
+      }
+      .main-grid { grid-template-columns: 1fr; }
+      .quick-stats { justify-content: center; }
+      .header-content h1 { font-size: 2rem; }
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- Status Banner -->
+    <div class="status-banner">
+      <div class="status-content">
+        <div class="pulse-dot"></div>
+        <span>🚧 Currently rebuilding and enhancing my portfolio — New projects and updates coming soon!</span>
+      </div>
+    </div>
+
+    <!-- Header -->
     <header>
-      <div class="avatar"><img src="https://imgur.com/KFntCEs.png" alt="Relax profile"></div>
-      <div>
-        <h1>Relax — Roblox Developer & UI Designer</h1>
-        <p class="lead">Scripting, building and design — focused on performance, UX, and monetization. Available for commissions and collaborations.</p>
-        <div style="margin-top:10px;display:flex;gap:10px;align-items:center">
-          <span class="chip">Luau</span>
-          <span class="chip">Roblox Studio</span>
-          <span class="chip">UI/UX</span>
-          <span class="chip">Builds & Optimization</span>
+      <div class="avatar">
+        <img src="https://imgur.com/KFntCEs.png" alt="Relax profile">
+      </div>
+      <div class="header-content">
+        <h1>Relax</h1>
+        <p class="subtitle">Roblox Developer & UI Designer</p>
+        <p style="color: var(--text-muted);">Crafting engaging game experiences with clean code and intuitive design</p>
+      </div>
+      <div class="quick-stats">
+        <div class="stat">
+          <div class="stat-number">7+</div>
+          <div class="stat-label">Years</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">25+</div>
+          <div class="stat-label">Projects</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Passion</div>
         </div>
       </div>
     </header>
 
-    <div class="grid">
+    <!-- Main Content -->
+    <div class="main-grid">
       <main>
+        <!-- About Section -->
         <div class="card">
-          <h2 style="margin:0 0 8px">About</h2>
-          <p style="color:var(--muted);margin:0 0 12px">I’m Relax — I’ve been developing Roblox games since 2018. I work on game systems (economy, tools, progression), Datastore saves, optimization, and interfaces that communicate clearly with players. I prefer projects that focus on retention and responsible monetization.</p>
-
-          <h2 style="margin-top:14px">Core Skills</h2>
-          <div class="skills" style="margin-top:8px">
-            <span class="chip">Advanced Luau</span>
-            <span class="chip">Datastore & Saves</span>
-            <span class="chip">State management (Modules)</span>
-            <span class="chip">UI Animations</span>
-            <span class="chip">Mobile-friendly UI</span>
-            <span class="chip">Build optimization</span>
+          <div class="card-header">
+            <h2 class="card-title">About Me</h2>
+            <p style="color: var(--text-muted);">Building the future of Roblox gaming</p>
           </div>
-
-          <h2 style="margin-top:16px">Featured Projects</h2>
-          <div class="projects">
-            <div class="project">
-              <div class="thumb">Mini City RP <br><small style="color:var(--muted);font-size:11px">2025</small></div>
-              <div class="meta">
-                <h3>Mini City RP</h3>
-                <p>Developed the core gameplay (economy, and leaderboards) and the entire HUD — optimized for over 50 simultaneous players.</p>
-              </div>
-            </div>
-
-            <div class="project">
-              <div class="thumb">The Galactic Expanse <br><small style="color:var(--muted);font-size:11px">2022</small></div>
-              <div class="meta">
-                <h3>The Galactic Expanse</h3>
-                <p>Mining system, loot balancing, and integrated shop — implemented basic anti-cheat and spawn optimizations.</p>
-              </div>
-            </div>
-
-            <div class="project">
-              <div class="thumb">Sakura Hibachi Restaurant <br><small style="color:var(--muted);font-size:11px">2021</small></div>
-              <div class="meta">
-                <h3>Sakura Hibachi Restaurant</h3>
-                <p>Full interior design, accessible interfaces, and menu animations that improved mobile retention by 18% (internal report).</p>
-              </div>
-            </div>
-          </div>
-
-          <h2 style="margin-top:16px">Testimonials</h2>
-          <div style="margin-top:8px;color:var(--muted)">
-            <p style="margin:6px 0"><strong>— Studio Lead, PixelWave</strong><br>“Relax delivered the shop system in 2 weeks, with clean documentation and no critical bugs.”</p>
-            <p style="margin:6px 0"><strong>— Designer, BlueArc</strong><br>“Lightweight, responsive UI with consistent animations — players praised the new HUD.”</p>
+          <div class="card-content">
+            <p style="margin-bottom: 1rem;">Hey there! I'm Relax, a passionate Roblox developer with over 7 years of experience creating immersive gaming experiences. I specialize in game systems, UI/UX design, and performance optimization.</p>
+            <p style="margin-bottom: 1rem;">My focus is on building games that not only look great but also provide smooth, engaging gameplay that keeps players coming back. I believe in clean code, intuitive design, and responsible monetization strategies.</p>
+            <p><strong>Currently working on:</strong> Expanding my portfolio with new innovative projects and exploring advanced Luau techniques!</p>
           </div>
         </div>
 
-        <div class="card" style="margin-top:14px">
-          <h2 style="margin:0 0 8px">Services</h2>
-          <ul style="color:var(--muted);margin:0 0 0 18px;padding:0">
-            <li>Game systems commissions (tools, shops, progression)</li>
-            <li>UI/UX for mobile and PC (prototyping + animations)</li>
-            <li>Map building and performance optimization</li>
-          </ul>
+        <!-- Skills Section -->
+        <div class="card" style="margin-top: 2rem;">
+          <div class="card-header">
+            <h2 class="card-title">Technical Expertise</h2>
+            <p style="color: var(--text-muted);">Technologies and tools I work with</p>
+          </div>
+          <div class="card-content">
+            <div class="skills-grid">
+              <div class="skill-category">
+                <h4>Programming</h4>
+                <div class="skill-list">
+                  <span class="skill-tag">Advanced Luau</span>
+                  <span class="skill-tag">OOP Design</span>
+                  <span class="skill-tag">Module Scripts</span>
+                </div>
+              </div>
+              <div class="skill-category">
+                <h4>Game Systems</h4>
+                <div class="skill-list">
+                  <span class="skill-tag">Economy Design</span>
+                  <span class="skill-tag">Datastore</span>
+                  <span class="skill-tag">Anti-Cheat</span>
+                </div>
+              </div>
+              <div class="skill-category">
+                <h4>UI/UX Design</h4>
+                <div class="skill-list">
+                  <span class="skill-tag">Mobile-First</span>
+                  <span class="skill-tag">Animations</span>
+                  <span class="skill-tag">Accessibility</span>
+                </div>
+              </div>
+              <div class="skill-category">
+                <h4>Optimization</h4>
+                <div class="skill-list">
+                  <span class="skill-tag">Performance</span>
+                  <span class="skill-tag">Memory Management</span>
+                  <span class="skill-tag">Build Optimization</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="card" style="margin-top: 2rem;">
+          <div class="card-header">
+            <h2 class="card-title">Featured Projects</h2>
+            <p style="color: var(--text-muted);">Some of my recent work</p>
+          </div>
+          <div class="card-content">
+            <div class="project-card">
+              <div class="project-icon">MC</div>
+              <div class="project-info">
+                <h4>Mini City RP</h4>
+                <p>Complete roleplay system with economy, leaderboards, and optimized HUD for 50+ concurrent players</p>
+                <span class="project-year">2025</span>
+              </div>
+            </div>
+            <div class="project-card">
+              <div class="project-icon">GE</div>
+              <div class="project-info">
+                <h4>The Galactic Expanse</h4>
+                <p>Space mining game with balanced loot system, integrated marketplace, and anti-cheat protection</p>
+                <span class="project-year">2022</span>
+              </div>
+            </div>
+            <div class="project-card">
+              <div class="project-icon">SH</div>
+              <div class="project-info">
+                <h4>Sakura Hibachi Restaurant</h4>
+                <p>Restaurant simulation with custom interior design and mobile-optimized interface (+18% retention)</p>
+                <span class="project-year">2021</span>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
 
+      <!-- Sidebar -->
       <aside>
-        <div class="card">
-          <h3 style="margin:0 0 8px">Contact</h3>
-          <p style="color:var(--muted);margin:0 0 12px">Interested in hiring or collaborating? Reach out:</p>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <span class="ghost">Roblox: HeatRelax</span>
-            <span class="ghost">Discord: heatrelax</span>
+        <!-- Contact Card -->
+        <div class="card sidebar-card">
+          <div class="card-header">
+            <h3 class="card-title">Get In Touch</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Ready to collaborate?</p>
+          </div>
+          <div class="card-content">
+            <div class="contact-item">
+              <div class="contact-icon">R</div>
+              <div>
+                <strong>Roblox</strong><br>
+                <span style="color: var(--text-muted); font-size: 0.9rem;">HeatRelax</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">D</div>
+              <div>
+                <strong>Discord</strong><br>
+                <span style="color: var(--text-muted); font-size: 0.9rem;">heatrelax</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="card" style="margin-top:14px">
-          <h3 style="margin:0 0 8px">Availability</h3>
-          <p style="color:var(--muted);margin:0">Freelance / Collaboration — open for small to medium projects. Typical delivery: 1–4 weeks depending on scope.</p>
+        <!-- Services Card -->
+        <div class="card sidebar-card">
+          <div class="card-header">
+            <h3 class="card-title">Services</h3>
+          </div>
+          <div class="card-content">
+            <ul style="list-style: none; color: var(--text-muted);">
+              <li style="margin-bottom: 0.5rem;">🎮 Game System Development</li>
+              <li style="margin-bottom: 0.5rem;">🎨 UI/UX Design & Animation</li>
+              <li style="margin-bottom: 0.5rem;">🏗️ Map Building & Optimization</li>
+              <li style="margin-bottom: 0.5rem;">⚡ Performance Optimization</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Availability Card -->
+        <div class="card sidebar-card">
+          <div class="card-header">
+            <h3 class="card-title">Availability</h3>
+          </div>
+          <div class="card-content">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+              <div class="pulse-dot"></div>
+              <span style="color: var(--success); font-weight: 500;">Available for new projects</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Currently accepting small to medium-sized projects. Typical delivery time: 1-4 weeks depending on scope.</p>
+          </div>
+        </div>
+
+        <!-- Testimonials Card -->
+        <div class="card sidebar-card">
+          <div class="card-header">
+            <h3 class="card-title">What Clients Say</h3>
+          </div>
+          <div class="card-content">
+            <blockquote style="border-left: 3px solid var(--accent); padding-left: 1rem; margin-bottom: 1rem;">
+              <p style="font-style: italic; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">"Clean code, delivered on time with excellent documentation. No critical bugs!"</p>
+              <cite style="font-size: 0.8rem; color: var(--text-muted);">— Studio Lead, PixelWave</cite>
+            </blockquote>
+            <blockquote style="border-left: 3px solid var(--accent); padding-left: 1rem;">
+              <p style="font-style: italic; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">"Responsive UI with smooth animations. Players love the new interface!"</p>
+              <cite style="font-size: 0.8rem; color: var(--text-muted);">— Designer, BlueArc</cite>
+            </blockquote>
+          </div>
         </div>
       </aside>
     </div>
 
+    <!-- Footer -->
     <footer>
-      <p>© Relax — Roblox Developer</p>
+      <p>© 2025 Relax — Roblox Developer & UI Designer</p>
+      <p style="margin-top: 0.5rem; font-size: 0.9rem;">Building amazing experiences, one script at a time ✨</p>
     </footer>
   </div>
 </body>
