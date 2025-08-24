@@ -7,16 +7,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #fafafa;
-      --card: #ffffff;
-      --border: #e5e7eb;
-      --text: #111827;
-      --text-muted: #6b7280;
-      --accent: #3b82f6;
-      --accent-light: #dbeafe;
+      --bg: #0a0a0a;
+      --card: #111111;
+      --border: #1f1f1f;
+      --text: #ffffff;
+      --text-muted: #a1a1aa;
+      --accent: #6366f1;
+      --accent-light: #1e1b4b;
       --success: #10b981;
       --warning: #f59e0b;
-      --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
       font-family: 'Inter', system-ui, sans-serif;
     }
 
@@ -48,6 +48,7 @@
       margin: -2rem -2rem 2rem -2rem;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
     }
 
     .status-banner::before {
@@ -176,11 +177,12 @@
       border: 1px solid var(--border);
       overflow: hidden;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
     }
 
     .card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 10px 25px -3px rgba(99, 102, 241, 0.2);
     }
 
     .card-header {
@@ -252,6 +254,7 @@
     .project-card:hover {
       border-color: var(--accent);
       transform: translateX(4px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
     }
 
     .project-icon {
@@ -340,6 +343,41 @@
       .main-grid { grid-template-columns: 1fr; }
       .quick-stats { justify-content: center; }
       .header-content h1 { font-size: 2rem; }
+    }
+
+    /* Added special styling for free service highlight */
+    .free-service {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      padding: 1rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .free-service::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      animation: shimmer 3s infinite;
+    }
+
+    .free-badge {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      margin-bottom: 0.5rem;
     }
   </style>
 </head>
@@ -506,11 +544,19 @@
             <h3 class="card-title">Services</h3>
           </div>
           <div class="card-content">
+            <!-- Added free portfolio building service highlight -->
+            <div class="free-service">
+              <div class="free-badge">Limited Time</div>
+              <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Portfolio Building - FREE</h4>
+              <p style="font-size: 0.9rem; opacity: 0.9;">I'm offering free portfolio creation for fellow developers to build my own portfolio. Clean, modern designs that showcase your work!</p>
+            </div>
+            
             <ul style="list-style: none; color: var(--text-muted);">
               <li style="margin-bottom: 0.5rem;">🎮 Game System Development</li>
               <li style="margin-bottom: 0.5rem;">🎨 UI/UX Design & Animation</li>
               <li style="margin-bottom: 0.5rem;">🏗️ Map Building & Optimization</li>
               <li style="margin-bottom: 0.5rem;">⚡ Performance Optimization</li>
+              <li style="margin-bottom: 0.5rem; color: var(--success); font-weight: 500;">💼 Portfolio Creation (FREE)</li>
             </ul>
           </div>
         </div>
