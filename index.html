@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Relax — Roblox Developer</title>
+  <title>Relax | Roblox Developer</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -20,11 +20,7 @@
       font-family: 'Inter', system-ui, sans-serif;
     }
 
-    * { 
-      box-sizing: border-box; 
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background: var(--bg);
@@ -39,7 +35,7 @@
       padding: 2rem;
     }
 
-    /* Header with status banner */
+    /* Status Banner */
     .status-banner {
       background: var(--gradient);
       color: white;
@@ -50,7 +46,6 @@
       overflow: hidden;
       box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
     }
-
     .status-banner::before {
       content: '';
       position: absolute;
@@ -61,12 +56,10 @@
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
       animation: shimmer 3s infinite;
     }
-
     @keyframes shimmer {
       0% { left: -100%; }
       100% { left: 100%; }
     }
-
     .status-content {
       display: flex;
       align-items: center;
@@ -74,7 +67,6 @@
       gap: 0.5rem;
       font-weight: 500;
     }
-
     .pulse-dot {
       width: 8px;
       height: 8px;
@@ -82,13 +74,12 @@
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
-
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.5; transform: scale(1.2); }
     }
 
-    /* Main header */
+    /* Header */
     header {
       display: grid;
       grid-template-columns: auto 1fr auto;
@@ -101,7 +92,6 @@
       border: 1px solid var(--border);
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
-
     .avatar {
       width: 100px;
       height: 100px;
@@ -110,17 +100,8 @@
       border: 3px solid var(--accent-light);
       transition: transform 0.3s ease;
     }
-
-    .avatar:hover {
-      transform: scale(1.05) rotate(2deg);
-    }
-
-    .avatar img { 
-      width: 100%; 
-      height: 100%; 
-      object-fit: cover; 
-    }
-
+    .avatar:hover { transform: scale(1.05) rotate(2deg); }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; }
     .header-content h1 {
       font-size: 2.5rem;
       font-weight: 700;
@@ -130,18 +111,15 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-
     .header-content .subtitle {
       color: var(--text-muted);
       font-size: 1.1rem;
       margin-bottom: 1rem;
     }
-
     .quick-stats {
       display: flex;
       gap: 1rem;
     }
-
     .stat {
       text-align: center;
       padding: 1rem;
@@ -149,13 +127,11 @@
       border-radius: 12px;
       min-width: 80px;
     }
-
     .stat-number {
       font-size: 1.5rem;
       font-weight: 700;
       color: var(--accent);
     }
-
     .stat-label {
       font-size: 0.8rem;
       color: var(--text-muted);
@@ -163,14 +139,13 @@
       letter-spacing: 0.5px;
     }
 
-    /* Main content grid */
+    /* Grid */
     .main-grid {
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 2rem;
       margin-bottom: 3rem;
     }
-
     .card {
       background: var(--card);
       border-radius: 16px;
@@ -179,122 +154,49 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
     }
-
     .card:hover {
       transform: translateY(-2px);
       box-shadow: 0 10px 25px -3px rgba(99, 102, 241, 0.2);
     }
-
     .card-header {
       padding: 1.5rem 1.5rem 0;
       border-bottom: 1px solid var(--border);
       margin-bottom: 1.5rem;
     }
-
     .card-title {
       font-size: 1.25rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
     }
+    .card-content { padding: 0 1.5rem 1.5rem; }
 
-    .card-content {
-      padding: 0 1.5rem 1.5rem;
-    }
-
-    /* Skills section */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .skill-category {
-      padding: 1rem;
+    /* Testimonials */
+    .testimonial {
       background: var(--bg);
-      border-radius: 12px;
       border: 1px solid var(--border);
-    }
-
-    .skill-category h4 {
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .skill-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .skill-tag {
-      background: var(--accent-light);
-      color: var(--accent);
-      padding: 0.25rem 0.75rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 500;
-    }
-
-    /* Projects section */
-    .project-card {
-      display: flex;
-      gap: 1rem;
+      border-radius: 12px;
       padding: 1rem;
-      background: var(--bg);
-      border-radius: 12px;
-      border: 1px solid var(--border);
       margin-bottom: 1rem;
       transition: all 0.2s ease;
     }
-
-    .project-card:hover {
+    .testimonial:hover {
       border-color: var(--accent);
       transform: translateX(4px);
       box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
     }
-
-    .project-icon {
-      width: 60px;
-      height: 60px;
-      background: var(--gradient);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 600;
-      font-size: 1.2rem;
-    }
-
-    .project-info h4 {
-      margin-bottom: 0.25rem;
-      color: var(--text);
-    }
-
-    .project-info p {
+    .testimonial p {
+      font-style: italic;
       color: var(--text-muted);
-      font-size: 0.9rem;
       margin-bottom: 0.5rem;
     }
-
-    .project-year {
-      background: var(--warning);
-      color: white;
-      padding: 0.125rem 0.5rem;
-      border-radius: 12px;
-      font-size: 0.7rem;
+    .testimonial cite {
+      font-size: 0.85rem;
+      color: var(--accent);
       font-weight: 500;
     }
 
     /* Sidebar */
-    .sidebar-card {
-      margin-bottom: 1.5rem;
-    }
-
+    .sidebar-card { margin-bottom: 1.5rem; }
     .contact-item {
       display: flex;
       align-items: center;
@@ -305,11 +207,7 @@
       margin-bottom: 0.5rem;
       transition: background 0.2s ease;
     }
-
-    .contact-item:hover {
-      background: var(--accent-light);
-    }
-
+    .contact-item:hover { background: var(--accent-light); }
     .contact-icon {
       width: 32px;
       height: 32px;
@@ -331,53 +229,13 @@
       margin-top: 2rem;
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .container { padding: 1rem; }
       .status-banner { margin: -1rem -1rem 1rem -1rem; }
-      header { 
-        grid-template-columns: 1fr; 
-        text-align: center; 
-        gap: 1rem; 
-      }
+      header { grid-template-columns: 1fr; text-align: center; gap: 1rem; }
       .main-grid { grid-template-columns: 1fr; }
       .quick-stats { justify-content: center; }
       .header-content h1 { font-size: 2rem; }
-    }
-
-    /* Added special styling for free service highlight */
-    .free-service {
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: white;
-      padding: 1rem;
-      border-radius: 12px;
-      margin-bottom: 1rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .free-service::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      animation: shimmer 3s infinite;
-    }
-
-    .free-badge {
-      background: rgba(255, 255, 255, 0.2);
-      padding: 0.25rem 0.75rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      display: inline-block;
-      margin-bottom: 0.5rem;
     }
   </style>
 </head>
@@ -387,7 +245,7 @@
     <div class="status-banner">
       <div class="status-content">
         <div class="pulse-dot"></div>
-        <span>🚧 Currently rebuilding and enhancing my portfolio — New projects and updates coming soon!</span>
+        <span>🚧 Currently rebuilding and enhancing my portfolio. New updates coming soon!</span>
       </div>
     </div>
 
@@ -403,8 +261,8 @@
       </div>
       <div class="quick-stats">
         <div class="stat">
-          <div class="stat-number">7+</div>
-          <div class="stat-label">Years</div>
+          <div class="stat-number">1+</div>
+          <div class="stat-label">Year</div>
         </div>
         <div class="stat">
           <div class="stat-number">25+</div>
@@ -417,10 +275,10 @@
       </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- Main -->
     <div class="main-grid">
       <main>
-        <!-- About Section -->
+        <!-- About -->
         <div class="card">
           <div class="card-header">
             <h2 class="card-title">About Me</h2>
@@ -433,80 +291,24 @@
           </div>
         </div>
 
-        <!-- Skills Section -->
+        <!-- Testimonials (instead of projects) -->
         <div class="card" style="margin-top: 2rem;">
           <div class="card-header">
-            <h2 class="card-title">Technical Expertise</h2>
-            <p style="color: var(--text-muted);">Technologies and tools I work with</p>
+            <h2 class="card-title">Client Feedback</h2>
+            <p style="color: var(--text-muted);">What people say about my work</p>
           </div>
           <div class="card-content">
-            <div class="skills-grid">
-              <div class="skill-category">
-                <h4>Programming</h4>
-                <div class="skill-list">
-                  <span class="skill-tag">Advanced Luau</span>
-                  <span class="skill-tag">OOP Design</span>
-                  <span class="skill-tag">Module Scripts</span>
-                </div>
-              </div>
-              <div class="skill-category">
-                <h4>Game Systems</h4>
-                <div class="skill-list">
-                  <span class="skill-tag">Economy Design</span>
-                  <span class="skill-tag">Datastore</span>
-                  <span class="skill-tag">Anti-Cheat</span>
-                </div>
-              </div>
-              <div class="skill-category">
-                <h4>UI/UX Design</h4>
-                <div class="skill-list">
-                  <span class="skill-tag">Mobile-First</span>
-                  <span class="skill-tag">Animations</span>
-                  <span class="skill-tag">Accessibility</span>
-                </div>
-              </div>
-              <div class="skill-category">
-                <h4>Optimization</h4>
-                <div class="skill-list">
-                  <span class="skill-tag">Performance</span>
-                  <span class="skill-tag">Memory Management</span>
-                  <span class="skill-tag">Build Optimization</span>
-                </div>
-              </div>
+            <div class="testimonial">
+              <p>"Absolutely professional and detail-oriented. The system worked flawlessly and exceeded expectations."</p>
+              <cite>— Game Studio Owner</cite>
             </div>
-          </div>
-        </div>
-
-        <!-- Projects Section -->
-        <div class="card" style="margin-top: 2rem;">
-          <div class="card-header">
-            <h2 class="card-title">Featured Projects</h2>
-            <p style="color: var(--text-muted);">Some of my recent work</p>
-          </div>
-          <div class="card-content">
-            <div class="project-card">
-              <div class="project-icon">MC</div>
-              <div class="project-info">
-                <h4>Mini City RP</h4>
-                <p>Complete roleplay system with economy, leaderboards, and optimized HUD for 50+ concurrent players</p>
-                <span class="project-year">2025</span>
-              </div>
+            <div class="testimonial">
+              <p>"Relax delivered ahead of schedule with clear documentation. The UI design was modern and player-friendly."</p>
+              <cite>— Project Manager</cite>
             </div>
-            <div class="project-card">
-              <div class="project-icon">GE</div>
-              <div class="project-info">
-                <h4>The Galactic Expanse</h4>
-                <p>Space mining game with balanced loot system, integrated marketplace, and anti-cheat protection</p>
-                <span class="project-year">2022</span>
-              </div>
-            </div>
-            <div class="project-card">
-              <div class="project-icon">SH</div>
-              <div class="project-info">
-                <h4>Sakura Hibachi Restaurant</h4>
-                <p>Restaurant simulation with custom interior design and mobile-optimized interface (+18% retention)</p>
-                <span class="project-year">2021</span>
-              </div>
+            <div class="testimonial">
+              <p>"Working with Relax was a breeze. Reliable, creative, and always ready to solve problems."</p>
+              <cite>— Independent Developer</cite>
             </div>
           </div>
         </div>
@@ -514,7 +316,7 @@
 
       <!-- Sidebar -->
       <aside>
-        <!-- Contact Card -->
+        <!-- Contact -->
         <div class="card sidebar-card">
           <div class="card-header">
             <h3 class="card-title">Get In Touch</h3>
@@ -538,30 +340,22 @@
           </div>
         </div>
 
-        <!-- Services Card -->
+        <!-- Services -->
         <div class="card sidebar-card">
           <div class="card-header">
             <h3 class="card-title">Services</h3>
           </div>
           <div class="card-content">
-            <!-- Added free portfolio building service highlight -->
-            <div class="free-service">
-              <div class="free-badge">Limited Time</div>
-              <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Portfolio Building - FREE</h4>
-              <p style="font-size: 0.9rem; opacity: 0.9;">I'm offering free portfolio creation for fellow developers to build my own portfolio. Clean, modern designs that showcase your work!</p>
-            </div>
-            
             <ul style="list-style: none; color: var(--text-muted);">
               <li style="margin-bottom: 0.5rem;">🎮 Game System Development</li>
               <li style="margin-bottom: 0.5rem;">🎨 UI/UX Design & Animation</li>
               <li style="margin-bottom: 0.5rem;">🏗️ Map Building & Optimization</li>
               <li style="margin-bottom: 0.5rem;">⚡ Performance Optimization</li>
-              <li style="margin-bottom: 0.5rem; color: var(--success); font-weight: 500;">💼 Portfolio Creation (FREE)</li>
             </ul>
           </div>
         </div>
 
-        <!-- Availability Card -->
+        <!-- Availability -->
         <div class="card sidebar-card">
           <div class="card-header">
             <h3 class="card-title">Availability</h3>
@@ -574,29 +368,12 @@
             <p style="color: var(--text-muted); font-size: 0.9rem;">Currently accepting small to medium-sized projects. Typical delivery time: 1-4 weeks depending on scope.</p>
           </div>
         </div>
-
-        <!-- Testimonials Card -->
-        <div class="card sidebar-card">
-          <div class="card-header">
-            <h3 class="card-title">What Clients Say</h3>
-          </div>
-          <div class="card-content">
-            <blockquote style="border-left: 3px solid var(--accent); padding-left: 1rem; margin-bottom: 1rem;">
-              <p style="font-style: italic; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">"Clean code, delivered on time with excellent documentation. No critical bugs!"</p>
-              <cite style="font-size: 0.8rem; color: var(--text-muted);">— Studio Lead, PixelWave</cite>
-            </blockquote>
-            <blockquote style="border-left: 3px solid var(--accent); padding-left: 1rem;">
-              <p style="font-style: italic; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">"Responsive UI with smooth animations. Players love the new interface!"</p>
-              <cite style="font-size: 0.8rem; color: var(--text-muted);">— Designer, BlueArc</cite>
-            </blockquote>
-          </div>
-        </div>
       </aside>
     </div>
 
     <!-- Footer -->
     <footer>
-      <p>© 2025 Relax — Roblox Developer & UI Designer</p>
+      <p>© 2025 Relax | Roblox Developer & UI Designer</p>
       <p style="margin-top: 0.5rem; font-size: 0.9rem;">Building amazing experiences, one script at a time ✨</p>
     </footer>
   </div>
